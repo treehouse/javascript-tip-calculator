@@ -1,0 +1,28 @@
+section.split-amount {
+    ul {
+        @include flex(row, wrap, center, center);
+        gap: .25rem;
+        list-style: none;
+        li {
+            @include radius(50%);
+            @include simple-size(50px);
+            @include bg(var(--split-option-bg-color));
+            @include center-flex;
+            cursor: pointer;
+            border: 2px solid transparent;
+            opacity: 0.35;
+            transition: opacity 0.3s ease;
+            i {
+                color: var(--main-theme);
+                font-size: 1.25rem;
+            }
+            &.active {
+                border-color: #ccc;
+                opacity: 1;
+            }
+            &.pending {
+                opacity: 0.75;
+            }
+        }
+    }
+}

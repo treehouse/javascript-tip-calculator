@@ -1,0 +1,7 @@
+section.tip-amount {
+    .tip-option-btn-container {
+        @include flex(row, nowrap, space-between, center);
+        gap: .5rem;
+        margin-bottom: .5rem;
+    }
+}

@@ -1,0 +1,32 @@
+.final-output {
+    @include center-flex;
+    i, span {
+        color: var(--main-theme);
+        font-weight: 600;
+    }
+    i {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        margin-right: .5rem;
+    }
+    span {
+        font-size: 3rem;
+    }
+    p {
+        color: white;
+        font-size: .9rem;
+        @include break(400px) {
+            font-size: 1rem;
+        }
+    }
+
+    @include break(smedium) {
+        padding: 2.5rem 1rem;
+        i {
+            font-size: 2rem;
+        }
+        span {
+            font-size: 4rem;
+        }
+    }
+}

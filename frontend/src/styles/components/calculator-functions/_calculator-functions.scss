@@ -1,0 +1,26 @@
+.calculator-functions {
+    @include bg(white);
+    @include radius(1rem);
+    color: var(--main-color);
+    padding: 1rem;
+
+    @include break(smedium) {
+        padding: 2.5rem 3.5rem;
+    }
+
+    section {
+        @include flex(column, nowrap, center, stretch);
+        margin-bottom: 2rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        p.section-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    @include break(smedium) {
+        @include radius(.75rem);
+    }
+}

@@ -1,0 +1,16 @@
+.calculator-container {
+    @include wrapper(450px);
+    display: grid;
+    grid-template-rows: 1fr 150px;
+    padding: .5rem;
+    min-height: 100vh;
+
+    @include break(smedium) {
+        @include bg(var(--main-bg-dark));
+        @include radius(1rem);
+        padding: .4rem;
+        min-height: auto;
+        grid-template-rows: 1fr auto;
+        box-shadow: 0 5px 10px rgba(0,0,0,.15);
+    }
+}

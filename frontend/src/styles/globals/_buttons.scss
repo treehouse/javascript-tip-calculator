@@ -1,0 +1,17 @@
+button {
+    @include radius(.33rem);
+    @include bg(var(--btn-bg-color));
+    padding: .75rem;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background .3s ease, color .3s ease;
+    &:hover {
+        @include bg(var(--btn-bg-color-hover));
+    }
+    &.active {
+        @include bg(var(--main-theme));
+        color: white;
+        font-weight: 400;
+    }
+}

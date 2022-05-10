@@ -4,11 +4,32 @@
     box-sizing: border-box;
 }
 
-body {
-    --main-color: #444C5D;
-    --main-bg: #ECEFF4;
-    --btn-bg-color: #ECEFF4
+// :root {
+    
+// }
 
+body {
+    --main-bg-dark: #444C5D;
+    --main-color: #444C5D;
+
+    --light-gray: #ECEFF4;
+    --main-bg-light: #ECEFF4;
+    --btn-bg-color: var(--light-gray);
+    --btn-bg-color-hover: #dde2ea;
+    --input-bg: var(--light-gray);
+    --split-option-bg-color: var(--light-gray);
+    
     // main theme
     --main-theme: var(--blue);
+
+    min-height: 100vh;
+    overflow:hidden;
+
+    // mobile bg color
+    @include bg(var(--main-bg-dark));
+
+    @include break(smedium) {
+        @include center-flex;
+        @include bg(var(--main-bg-light));
+    }
 }
