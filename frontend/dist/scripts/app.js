@@ -1,0 +1,1 @@
+const calculatorData={randomThemeOnLoad:!0,defaultTotal:0,defaultTippingOptions:[5,10,15],customTip:!0,totalSplit:6};if(calculatorData.randomThemeOnLoad){const t=["#87C0D0","#8FBDBA","#B38EAE","#A3BE8C"],a=Math.floor(Math.random()*t.length);document.body.style.setProperty("--main-theme",t[a])}
