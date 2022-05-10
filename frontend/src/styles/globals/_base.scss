@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    --main-color: #444C5D;
+    --main-bg: #ECEFF4;
+    --btn-bg-color: #ECEFF4
+
+    // main theme
+    --main-theme: var(--blue);
+}
