@@ -1,0 +1,32 @@
+{
+  "name": "gulp-sass.starter",
+  "version": "1.0.0",
+  "description": "template for gulp sass starter file generator",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "npm install && gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dustinusey/gulp-sass.starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dustinusey/gulp-sass.starter/issues"
+  },
+  "homepage": "https://github.com/dustinusey/gulp-sass.starter#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-terser": "^2.1.0",
+    "sass": "^1.49.9"
+  },
+  "dependencies": {
+    "nord": "^0.2.1"
+  }
+}

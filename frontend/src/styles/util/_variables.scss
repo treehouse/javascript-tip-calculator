@@ -1,0 +1,16 @@
+$breakpoints: (
+  // smalls
+  "small": 320px,
+  "mobile": 320px,
+  //   mediums
+  "smedium": 500px,
+  "medium": 768px,
+  "tablet": 768px,
+  //   larges
+  "large": 1024px,
+  "desktop": 1024px,
+  //   extra larges
+  "xlarge": 1200px,
+  "xxlarge": 1440px,
+  "widescreen": 1440px
+) !default;
