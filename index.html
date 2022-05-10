@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./frontend/dist/images/favicon.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- styles -->
     <link rel="stylesheet" href="./frontend/dist/styles/app.css">
@@ -12,19 +14,29 @@
 </head>
 <body>
 
+    <div class="overlay">
+        <div class="modal">
+            
+        </div>
+    </div>
+
     <main class="calculator-container">
         <div class="calculator-functions">
             <section class="bill-amount">
                 <p class="section-title">Bill Amount</p>
                 <div class="input-container">
                     <i class="fa-solid fa-dollar-sign"></i>
-                    <input type="text" placeholder="">
+                    <input type="text" placeholder="0.00">
+                </div>
+                <div class="bill-info-group">
+                    <p>Tip amount: $<span>0.00</span></p>
+                    <p>Total with tip: $<span>0.00</span></p>
                 </div>
             </section>
             <section class="tip-amount">
                 <p class="section-title">Tip Amount</p>
                 <div class="tip-option-btn-container">
-                    <button><span>5</span>%</button>
+                    <button class="active"><span>5</span>%</button>
                     <button><span>10</span>%</button>
                     <button><span>15</span>%</button>
                 </div>
@@ -33,9 +45,9 @@
                 </button>
             </section>
             <section class="split-amount">
-                <p class="section-title"></p>
+                <p class="section-title">How many people are paying?</p>
                 <ul>
-                    <li><i class="fa-solid fa-person"></i></li>
+                    <li class="active"><i class="fa-solid fa-person"></i></li>
                     <li><i class="fa-solid fa-person"></i></li>
                     <li><i class="fa-solid fa-person"></i></li>
                     <li><i class="fa-solid fa-person"></i></li>
