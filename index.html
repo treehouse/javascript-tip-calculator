@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- animation library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- favicon -->
     <link rel="shortcut icon" href="./frontend/dist/images/favicon.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +18,13 @@
 
     <div class="overlay">
         <div class="modal">
-            
+            <i class="fa-solid fa-x"></i>
+            <p>Enter a custom tip</p>
+            <div class="input-container">
+                <i class="fa-solid fa-dollar-sign"></i>
+                <input type="text" placeholder="0.00">
+            </div>
+            <button class="disabled">Confirm Tip</button>
         </div>
     </div>
 

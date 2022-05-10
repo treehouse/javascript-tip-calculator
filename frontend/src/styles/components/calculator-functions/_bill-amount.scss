@@ -1,32 +1,5 @@
 section.bill-amount {
-    .input-container {
-        position: relative;
-        i {
-            @include absolute-center;
-            color: var(--main-theme);
-            font-size: 1.5rem;
-            left: 8%;
-        }
-        input {
-            @include radius(.5rem);
-            @include bg(var(--input-bg));
-            color: var(--main-color);
-            width: 100%;
-            border: none;
-            padding: .5rem 1.5rem .5rem 2rem;
-            text-align: right;
-            font-size: 2rem;
-            border: 2px solid transparent;
-            transition: border .3s ease;
-            &::placeholder {
-                color: #ccc;
-            }
-            &:focus {
-                outline: none;
-                border-color: var(--main-theme);
-            }
-        }
-    }
+    
     .bill-info-group {
         @include flex(column, nowrap, space-evenly, center);
         height: 0;

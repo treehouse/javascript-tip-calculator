@@ -4,6 +4,7 @@
     grid-template-rows: 1fr 150px;
     padding: .5rem;
     min-height: 100vh;
+    transition: filter 1s ease;
 
     @include break(smedium) {
         @include bg(var(--main-bg-dark));
@@ -12,5 +13,9 @@
         min-height: auto;
         grid-template-rows: 1fr auto;
         box-shadow: 0 5px 10px rgba(0,0,0,.15);
+    }
+
+    &.blur {
+        filter: blur(1.5px);
     }
 }
