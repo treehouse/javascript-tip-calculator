@@ -1,6 +1,7 @@
 button {
     @include radius(.33rem);
     @include bg(var(--btn-bg-color));
+    color: var(--main-color);
     padding: .75rem;
     border: none;
     width: 100%;
