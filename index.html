@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./frontend/dist/styles/app.css">
     <!-- fontawesome library -->
     <script src="https://kit.fontawesome.com/6e358658ed.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>JavaScript Tip Calculator</title>
 </head>
 <body>
 
@@ -22,7 +22,7 @@
             <p>Enter a custom tip</p>
             <div class="input-container">
                 <i class="fa-solid fa-dollar-sign"></i>
-                <input type="text" placeholder="0.00">
+                <input type="text" id="" placeholder="0.00">
             </div>
             <button class="disabled">Confirm Tip</button>
         </div>
@@ -30,37 +30,32 @@
 
     <main class="calculator-container">
         <div class="calculator-functions">
+            <!-- bill amount -->
             <section class="bill-amount">
                 <p class="section-title">Bill Amount</p>
                 <div class="input-container">
                     <i class="fa-solid fa-dollar-sign"></i>
-                    <input type="text" placeholder="0.00">
+                    <input type="text" placeholder="0.00" id="bill-total-input">
                 </div>
-                <div class="bill-info-group">
-                    <p>Tip amount: $<span>0.00</span></p>
-                    <p>Total with tip: $<span>0.00</span></p>
+                <div class="bill-info-group" id="bill-info">
+                    <p>Tip amount: $<span id="tip-amount-text">0.00</span></p>
+                    <p>Total with tip: $<span id="total-amount-text">0.00</span></p>
                 </div>
             </section>
+            <!-- tip options -->
             <section class="tip-amount">
                 <p class="section-title">Tip Amount</p>
-                <div class="tip-option-btn-container">
-                    <button class="active"><span>5</span>%</button>
-                    <button><span>10</span>%</button>
-                    <button><span>15</span>%</button>
+                <div class="tip-option-btn-container" id="tip-option-btn-container">
+                    <!-- dynamic -->
                 </div>
                 <button class="custom-tip-btn">
                     Custom Tip
                 </button>
             </section>
+            <!-- split amount -->
             <section class="split-amount">
                 <p class="section-title">How many people are paying?</p>
-                <ul>
-                    <li class="active"><i class="fa-solid fa-person"></i></li>
-                    <li><i class="fa-solid fa-person"></i></li>
-                    <li><i class="fa-solid fa-person"></i></li>
-                    <li><i class="fa-solid fa-person"></i></li>
-                    <li><i class="fa-solid fa-person"></i></li>
-                    <li><i class="fa-solid fa-person"></i></li>
+                <ul id="split-container">
                 </ul>
             </section>
         </div>
