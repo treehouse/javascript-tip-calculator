@@ -1,6 +1,6 @@
 // basic data for calculator
 const calculatorData = {
-    randomThemeOnLoad: false,
+    randomThemeOnLoad: true,
     defaultTotal: {
         showDefaultTotal: true,
         total: '',
@@ -37,8 +37,6 @@ const billTotal = {
             if (calculatorData.defaultTotal.showDefaultTotal) {
                 billTotal.input.value = calculatorData.defaultTotal.total;
             }
-        },
-        update: () => {
         }
     }
 }
@@ -64,9 +62,6 @@ const tipOptions = {
             // set default active tip
             let tipOptionBtns = document.querySelectorAll('.tip-option');
             tipOptionBtns[0].classList.add('active');
-        },
-        update: () => {
-            
         }
     }
 }
@@ -86,9 +81,6 @@ const splitOptions = {
             // set default active split option
             let defaultSplit = document.querySelectorAll('#split-container li');
             defaultSplit[0].classList.add('active');
-        },
-        update: () => {
-
         }
     }
 }
@@ -99,16 +91,18 @@ const events = {
         const input = document.getElementById('bill-total-input');
         input.addEventListener('keyup', e => {
             let value = input.value;
-            if (isNaN(value) || value === ' ') {
+            if (isNaN(value) || value === ' ' || value === '') {
                 input.value = '';
                 toCalculate.bill = 0;
             } else {
                 toCalculate.bill = Number(value);
+                calculateBill();
             }
         })
     },
     tipOptions: () => {
-        const tipContainer = document.querySelector('#tip-option-btn-container')
+        const tipContainer = document.querySelector('#tip-option-btn-container');
+        const customTipBtn = document.getElementById('custom-tip-btn');
         tipContainer.addEventListener('click', e => {
             let tips = document.querySelectorAll('.tip-option-btn-container button');
             let spans = document.querySelectorAll('.tip-option-number');
@@ -120,6 +114,9 @@ const events = {
                     toCalculate.tip = Number(spans[index].textContent);
                     toCalculate.customTip = false;
                     tip.classList.add('active');
+                    customTipBtn.classList.remove('active');
+                    customTipBtn.textContent = 'Custom Tip';
+                    calculateBill();
                 }
             });
         });       
@@ -136,27 +133,39 @@ const events = {
         closeModal.forEach(btn => {
             btn.addEventListener('click', () => {
                 overlay.classList.toggle('show');
-                modal_tipInput.value = '';
             })
         });
 
         modal_tipInput.addEventListener('keyup', e => {
             let value = e.target.value;
-            if (isNaN(value) || value === ' ') {
+            if (isNaN(value) || value === ' ' || value === '') {
                 modal_tipInput.value = '';
                 toCalculate.customTipValue = 0;
                 modal_confirmBtn.classList.add('disabled');
+                toCalculate.customTip = false;
             } else {
                 toCalculate.customTipValue = Number(value);
+                toCalculate.customTip = true;
                 modal_confirmBtn.classList.remove('disabled');
+                
             }
         })
     },
-
     confirmCustomTip: () => {
-
+        const customTipBtn = document.getElementById('custom-tip-btn');
+        const confirmCustomTipBtn = document.getElementById('confirm-tip');
+        const tipOptionsBtns = document.querySelectorAll('.tip-option');
+        const modal_tipInput = document.getElementById('custom-tip-amount');
+        confirmCustomTipBtn.addEventListener('click', () => {
+            customTipBtn.classList.add('active');
+            customTipBtn.textContent = `Custom Tip ( $${modal_tipInput.value} )`
+            modal_tipInput.value = '';
+            calculateBill();
+            tipOptionsBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+        })
     },
-
     splitOptions: () => {
         let lis = document.querySelectorAll('#split-container li');
         lis.forEach((li, index) => {
@@ -175,7 +184,7 @@ const events = {
         lis.forEach((li, index) => {
             li.addEventListener('click', () => {
                 toCalculate.split = Number(index + 1);
-                console.log(toCalculate.split);
+                calculateBill();
                 lis.forEach((item) => {
                     item.classList.remove('active');
                 })
@@ -186,14 +195,40 @@ const events = {
             })
         })
     },
-    
+    // listener for events
     listen: () => {
         events.billTotal();
         events.tipOptions();
         events.customTip();
         events.splitOptions();
+        events.confirmCustomTip();
     }
  }
+
+// function to show additional info
+function showAdditionalInfo() {
+    console.log('...running')
+}
+// function to calculate bill
+function calculateBill() {
+    const finalOutput = document.querySelector('.final-output span');
+    let bill = toCalculate.bill;
+    let tip;
+    let split = toCalculate.split;
+    let final;
+
+    if (toCalculate.customTip) {
+        tip = toCalculate.customTipValue;
+        final = (bill + tip) / split;
+    } else {
+        tip = toCalculate.tip / 100;
+        tipTotal = bill * tip;
+        final = (bill + tipTotal) / split;
+    }
+
+
+    finalOutput.textContent = final.toFixed(2);
+}
 
 
 const application = {
@@ -201,17 +236,11 @@ const application = {
         billTotal.UI.build();
         tipOptions.UI.build();
         splitOptions.UI.build();
-    },
-    update: () => {
-        billTotal.UI.update();
-        tipOptions.UI.update();
-        splitOptions.UI.update();
     }
 }
 
 // build 
 application.build();
-application.update();
 
 // events
 events.listen();

@@ -1,5 +1,5 @@
 .overlay {
-    @include bg(rgba(0, 0, 0,0.25));
+    @include bg(rgba(0, 0, 0,0.33));
     @include center-flex;
     color: var(--main-color);
     position: fixed;
@@ -43,6 +43,7 @@
             margin-top: 1rem;
             opacity: 1;
             pointer-events: auto;
+            color: white;
             transition: opacity .3s ease, color .3s ease;
             &:hover {
                 color: white;
@@ -51,12 +52,14 @@
                 @include bg(var(--btn-bg-color));
                 opacity: 0.25;
                 pointer-events: none;
+                color: black;
             }
         }
     }
 
     &.show {
         opacity: 1;
+        pointer-events: auto;
         .modal {
             animation: slideInUp .6s ease forwards;
             opacity: 1;

@@ -15,7 +15,7 @@ function styles() {
 
 function scripts() {
     return src('./frontend/src/scripts/app.js')
-        .pipe(scriptsMinify())
+        // .pipe(scriptsMinify())
         .pipe(dest('./frontend/dist/scripts'))
 }
 

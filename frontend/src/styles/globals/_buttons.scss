@@ -7,6 +7,9 @@ button {
     width: 100%;
     cursor: pointer;
     transition: background .3s ease, color .3s ease;
+    span {
+        pointer-events: none;
+    }
     &:hover {
         @include bg(var(--btn-bg-color-hover));
     }

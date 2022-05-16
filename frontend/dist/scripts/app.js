@@ -1,1 +1,247 @@
-const calculatorData={randomThemeOnLoad:!1,defaultTotal:{showDefaultTotal:!0,total:0},defaultTippingOptions:[5,10,15],customTip:!0,defaultSplitTotal:6},toCalculate={bill:0,tip:5,split:1};if(calculatorData.randomThemeOnLoad){const t=["#87C0D0","#8FBDBA","#B38EAE","#A3BE8C"],l=Math.floor(Math.random()*t.length);document.body.style.setProperty("--main-theme",t[l])}const billTotal={total:calculatorData.defaultTotal.total,input:document.getElementById("bill-total-input"),tipAmountText:document.getElementById("tip-amount-text"),totalAmountText:document.getElementById("total-amount-text"),UI:{build:()=>{calculatorData.defaultTotal.showDefaultTotal&&(billTotal.input.value=calculatorData.defaultTotal.total)},update:()=>{}}},tipOptions={UI:{tipOptionBtnContianer:document.getElementById("tip-option-btn-container"),build:()=>{calculatorData.defaultTippingOptions.forEach((t=>{let l=document.createElement("button");l.classList="tip-option";let a=document.createElement("span");a.textContent=t,l.appendChild(a),l.textContent+="%",tipOptions.UI.tipOptionBtnContianer.appendChild(l)})),document.querySelectorAll(".tip-option")[0].classList.add("active")},update:()=>{}}},splitOptions={UI:{build:()=>{const t=document.getElementById("split-container");for(let l=0;l<calculatorData.defaultSplitTotal;l++){let l=document.createElement("li"),a=document.createElement("i");a.classList="fa-solid fa-person",l.appendChild(a),t.appendChild(l)}document.querySelectorAll("#split-container li")[0].classList.add("active")},update:()=>{}}},application={build:()=>{billTotal.UI.build(),tipOptions.UI.build(),splitOptions.UI.build()},update:()=>{billTotal.UI.update(),tipOptions.UI.update(),splitOptions.UI.update()}};application.build(),application.update();
+// basic data for calculator
+const calculatorData = {
+    randomThemeOnLoad: true,
+    defaultTotal: {
+        showDefaultTotal: true,
+        total: '',
+    },
+    defaultTippingOptions: [5, 10, 15],
+    customTip: true,
+    defaultSplitTotal: 6
+}
+
+const toCalculate = {
+    bill: 0,
+    tip: 5,
+    split: 1,
+    customTip: false,
+    customTipValue: 0
+}
+
+
+// theme logic
+if (calculatorData.randomThemeOnLoad) {
+    const colors = ['#87C0D0', '#8FBDBA', '#B38EAE', '#A3BE8C'];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    document.body.style.setProperty('--main-theme', colors[randomIndex]);
+}
+
+// bill total
+const billTotal = {
+    total: calculatorData.defaultTotal.total,
+    input: document.getElementById('bill-total-input'),
+    tipAmountText: document.getElementById('tip-amount-text'),
+    totalAmountText: document.getElementById('total-amount-text'),
+    UI: {
+        build: () => {
+            if (calculatorData.defaultTotal.showDefaultTotal) {
+                billTotal.input.value = calculatorData.defaultTotal.total;
+            }
+        }
+    }
+}
+
+// tip options
+const tipOptions = {
+    UI: {
+        tipOptionBtnContianer: document.getElementById('tip-option-btn-container'),
+        build: () => {
+            // build tip options
+            calculatorData.defaultTippingOptions.forEach(option => {
+                let btn = document.createElement('button');
+                btn.classList = 'tip-option';
+                let span = document.createElement('span');
+                span.classList = 'tip-option-number';
+                let percent = document.createElement('span');
+                percent.textContent = '%';
+                span.textContent = option
+                btn.appendChild(span);
+                btn.appendChild(percent);
+                tipOptions.UI.tipOptionBtnContianer.appendChild(btn);
+            });
+            // set default active tip
+            let tipOptionBtns = document.querySelectorAll('.tip-option');
+            tipOptionBtns[0].classList.add('active');
+        }
+    }
+}
+
+// split options
+const splitOptions = {
+    UI: {
+        build: () => {
+            const container = document.getElementById("split-container");
+            for (let i = 0; i < calculatorData.defaultSplitTotal; i++) {
+                let li = document.createElement('li');
+                let icon = document.createElement('i');
+                icon.classList = 'fa-solid fa-person';
+                li.appendChild(icon)
+                container.appendChild(li);
+            }
+            // set default active split option
+            let defaultSplit = document.querySelectorAll('#split-container li');
+            defaultSplit[0].classList.add('active');
+        }
+    }
+}
+
+
+const events = { 
+    billTotal: () => {
+        const input = document.getElementById('bill-total-input');
+        input.addEventListener('keyup', e => {
+            let value = input.value;
+            if (isNaN(value) || value === ' ' || value === '') {
+                input.value = '';
+                toCalculate.bill = 0;
+            } else {
+                toCalculate.bill = Number(value);
+                calculateBill();
+            }
+        })
+    },
+    tipOptions: () => {
+        const tipContainer = document.querySelector('#tip-option-btn-container');
+        const customTipBtn = document.getElementById('custom-tip-btn');
+        tipContainer.addEventListener('click', e => {
+            let tips = document.querySelectorAll('.tip-option-btn-container button');
+            let spans = document.querySelectorAll('.tip-option-number');
+            tips.forEach(tip => {
+                tip.classList.remove('active');
+            });
+            tips.forEach((tip, index) => {
+                if (e.target === tip) {
+                    toCalculate.tip = Number(spans[index].textContent);
+                    toCalculate.customTip = false;
+                    tip.classList.add('active');
+                    customTipBtn.classList.remove('active');
+                    customTipBtn.textContent = 'Custom Tip';
+                    calculateBill();
+                }
+            });
+        });       
+    },
+    customTip: () => {
+        const customTipBtn = document.getElementById('custom-tip-btn');
+        const overlay = document.getElementById('overlay')
+        const closeModal = document.querySelectorAll('.close-modal');
+        const modal_confirmBtn = document.getElementById('confirm-tip');
+        const modal_tipInput = document.getElementById('custom-tip-amount');
+        customTipBtn.addEventListener('click', () => {
+            overlay.classList.toggle('show');
+        });
+        closeModal.forEach(btn => {
+            btn.addEventListener('click', () => {
+                overlay.classList.toggle('show');
+            })
+        });
+
+        modal_tipInput.addEventListener('keyup', e => {
+            let value = e.target.value;
+            if (isNaN(value) || value === ' ' || value === '') {
+                modal_tipInput.value = '';
+                toCalculate.customTipValue = 0;
+                modal_confirmBtn.classList.add('disabled');
+                toCalculate.customTip = false;
+            } else {
+                toCalculate.customTipValue = Number(value);
+                toCalculate.customTip = true;
+                modal_confirmBtn.classList.remove('disabled');
+                
+            }
+        })
+    },
+    confirmCustomTip: () => {
+        const customTipBtn = document.getElementById('custom-tip-btn');
+        const confirmCustomTipBtn = document.getElementById('confirm-tip');
+        const tipOptionsBtns = document.querySelectorAll('.tip-option');
+        const modal_tipInput = document.getElementById('custom-tip-amount');
+        confirmCustomTipBtn.addEventListener('click', () => {
+            customTipBtn.classList.add('active');
+            customTipBtn.textContent = `Custom Tip ( $${modal_tipInput.value} )`
+            modal_tipInput.value = '';
+            calculateBill();
+            tipOptionsBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+        })
+    },
+    splitOptions: () => {
+        let lis = document.querySelectorAll('#split-container li');
+        lis.forEach((li, index) => {
+            li.addEventListener('mouseover', () => {
+                for (let i = 0; i < index; i++) {
+                    lis[i + 1].classList.add('pending');
+                }
+            });
+            li.addEventListener('mouseout', () => {
+                for (let i = 0; i < index; i++) {
+                    lis[i + 1].classList.remove('pending');
+                }
+            })
+        })
+
+        lis.forEach((li, index) => {
+            li.addEventListener('click', () => {
+                toCalculate.split = Number(index + 1);
+                calculateBill();
+                lis.forEach((item) => {
+                    item.classList.remove('active');
+                })
+                li.classList.add('active');
+                for (let i = 0; i < index; i++) {
+                    lis[i].classList.add('active');
+                }
+            })
+        })
+    },
+    // listener for events
+    listen: () => {
+        events.billTotal();
+        events.tipOptions();
+        events.customTip();
+        events.splitOptions();
+        events.confirmCustomTip();
+    }
+ }
+
+// function to show additional info
+function showAdditionalInfo() {
+    console.log('...running')
+}
+// function to calculate bill
+function calculateBill() {
+    const finalOutput = document.querySelector('.final-output span');
+    let bill = toCalculate.bill;
+    let tip;
+    let split = toCalculate.split;
+    let final;
+
+    if (toCalculate.customTip) {
+        tip = toCalculate.customTipValue;
+        final = (bill + tip) / split;
+    } else {
+        tip = toCalculate.tip / 100;
+        tipTotal = bill * tip;
+        final = (bill + tipTotal) / split;
+    }
+
+
+    finalOutput.textContent = final.toFixed(2);
+}
+
+
+const application = {
+    build: () => {
+        billTotal.UI.build();
+        tipOptions.UI.build();
+        splitOptions.UI.build();
+    }
+}
+
+// build 
+application.build();
+
+// events
+events.listen();
+

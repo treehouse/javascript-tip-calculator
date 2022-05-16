@@ -16,15 +16,15 @@
 </head>
 <body>
 
-    <div class="overlay">
+    <div class="overlay" id="overlay">
         <div class="modal">
-            <i class="fa-solid fa-x"></i>
+            <i class="close-modal fa-solid fa-x"></i>
             <p>Enter a custom tip</p>
             <div class="input-container">
                 <i class="fa-solid fa-dollar-sign"></i>
-                <input type="text" id="" placeholder="0.00">
+                <input type="text" id="custom-tip-amount" placeholder="0.00">
             </div>
-            <button class="disabled">Confirm Tip</button>
+            <button class="disabled close-modal" id="confirm-tip">Confirm Tip</button>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                 <div class="tip-option-btn-container" id="tip-option-btn-container">
                     <!-- dynamic -->
                 </div>
-                <button class="custom-tip-btn">
+                <button class="custom-tip-btn" id="custom-tip-btn">
                     Custom Tip
                 </button>
             </section>
