@@ -1,4 +1,5 @@
 ![](./assets/jtclogo.png)
+
 A Tip Calculator built with HTML, SCSS and vanilla JavaScript
 
 ## Installation
@@ -7,7 +8,8 @@ A Tip Calculator built with HTML, SCSS and vanilla JavaScript
 
 If you would like to download the repo and check out the code, open up your terminal and paste in the following:
 
-```git clone https://github.com/treehouse/javascript-tip-calculator.git
+```
+git clone https://github.com/treehouse/javascript-tip-calculator.git
 
 ```
 
