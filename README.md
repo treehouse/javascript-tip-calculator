@@ -5,7 +5,6 @@ A Tip Calculator built with HTML, SCSS and vanilla JavaScript
 
 
 # Installation
----
 
 If you would like to download the repo and check out the code, open up your terminal and paste in the following:
 
@@ -29,7 +28,6 @@ If you just want to browse the code, you will see the compiled SCSS as CSS in `f
 
 
 # Updating code
----
 
 
 
