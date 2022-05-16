@@ -135,6 +135,7 @@ const events = {
         closeModal.forEach(btn => {
             btn.addEventListener('click', () => {
                 overlay.classList.toggle('show');
+                modal_confirmBtn.classList.add('disabled');
             })
         });
 
