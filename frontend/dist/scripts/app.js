@@ -1,6 +1,6 @@
 // basic data for calculator
 const calculatorData = {
-    randomThemeOnLoad: true,
+    randomThemeOnLoad: false,
     defaultTotal: {
         showDefaultTotal: true,
         total: '',
