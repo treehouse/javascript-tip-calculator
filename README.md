@@ -34,7 +34,7 @@ If you just want to browse the code, you will see the compiled SCSS as CSS in `f
 If you want to update and play around with the code, make sure you have node and npm installed. This project uses a gulpfile to track changes in files and output them into the dist folder.
 
 
-run `npm start` in the root directory of the project and npm will install all the project's dependencies and then spin up a local server. You should then see the calculator int he browser. To make changes to the code, you'll need to work in the `src` directory. `frontend/src/styles` and `frontend/src/scripts`
+run `npm start` in the root directory of the project and npm will install all the project's dependencies and then spin up a local server. You should then see the calculator in the browser. To make changes to the code, you'll need to work in the `src` directory. `frontend/src/styles` and `frontend/src/scripts`
 
 
 ![](./assets/src.png)
