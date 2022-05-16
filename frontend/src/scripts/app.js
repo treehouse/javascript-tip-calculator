@@ -94,9 +94,11 @@ const events = {
             if (isNaN(value) || value === ' ' || value === '') {
                 input.value = '';
                 toCalculate.bill = 0;
+                showAdditionalInfo(false);
             } else {
                 toCalculate.bill = Number(value);
                 calculateBill();
+                showAdditionalInfo(true);
             }
         })
     },
@@ -206,11 +208,24 @@ const events = {
  }
 
 // function to show additional info
-function showAdditionalInfo() {
-    console.log('...running')
+function showAdditionalInfo(visibility) {
+    const billInfo = document.getElementById('bill-info');
+
+    if (visibility) {
+        billInfo.classList.add('show');
+    } else {
+        billInfo.classList.remove('show');
+    }
 }
+
+// function for additional info logic
+
+
 // function to calculate bill
 function calculateBill() {
+    const additionalInfo_tipAmount = document.getElementById('tip-amount-text');
+    const additionalInfo_totalWithTip = document.getElementById('total-amount-text');
+
     const finalOutput = document.querySelector('.final-output span');
     let bill = toCalculate.bill;
     let tip;
@@ -219,12 +234,21 @@ function calculateBill() {
 
     if (toCalculate.customTip) {
         tip = toCalculate.customTipValue;
+
+        additionalInfo_tipAmount.textContent = tip;
+        additionalInfo_totalWithTip.textContent = bill + tip;
+
         final = (bill + tip) / split;
     } else {
         tip = toCalculate.tip / 100;
         tipTotal = bill * tip;
+
+        additionalInfo_tipAmount.textContent = tipTotal;
+        additionalInfo_totalWithTip.textContent = bill + tipTotal;
+
         final = (bill + tipTotal) / split;
     }
+
 
 
     finalOutput.textContent = final.toFixed(2);
