@@ -9,7 +9,7 @@ function styles() {
     return src('./frontend/src/styles/**/*.scss')
         .pipe(scssCompile())
         .pipe(addCssPrefixer('last 2 versions'))
-        .pipe(cssMinify())
+        // .pipe(cssMinify())
         .pipe(dest('./frontend/dist/styles'))
 }
 
