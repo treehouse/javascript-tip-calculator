@@ -18,7 +18,6 @@ const toCalculate = {
     customTipValue: 0
 }
 
-
 // theme logic
 if (calculatorData.randomThemeOnLoad) {
     const colors = ['#87C0D0', '#8FBDBA', '#B38EAE', '#A3BE8C'];
@@ -85,9 +84,6 @@ const splitOptions = {
     }
 }
 
-
-
-
 // function to show additional info
 function showAdditionalInfo(visibility) {
     const billInfo = document.getElementById('bill-info');
@@ -98,7 +94,6 @@ function showAdditionalInfo(visibility) {
         billInfo.classList.remove('show');
     }
 }
-
 
 // function to calculate bill
 function calculateBill() {
@@ -262,9 +257,6 @@ const application = {
         }
      }
 }
-
-
-
 
 
 // build 
